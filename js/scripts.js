@@ -1,36 +1,60 @@
 /**
  * Created by Cox on 09.04.2017.
  */
-window.onload = function () {
-    document.getElementById('Size').addEventListener('change', function () {
-        square.height = this.value;
-        draw(square);
-    });
-    document.getElementById('Size').addEventListener('change', function () {
-        square.width = this.value;
-        draw(square);
-    });
-    document.getElementById('Favcolor').addEventListener('change', function () {
-        square.borderColor = this.value;
-        draw(square);
-    });
+$(document).ready(function () {
+    var squareApplication = {
+        init: function () {
+            squareApplication.registerHandlers();
+            $(".canvas").append("<div class='square'></div>");
+            var currentSquare = $('.square');
+            currentSquare.width(squareApplication.square.width).height(squareApplication.square.height);
+        },
+        square: {
+            width: '300',
+            height: '200',
+            color: 'red'
+        },
 
-    function draw(square) {
-        if (document.getElementsByClassName('square').length > 0) {
-            document.getElementsByClassName('square')[0].setAttribute('style', 'width:' + square.width + 'px; height:' + square.height + 'px');
+        changeSize: function () {
+            var size = $('#Size[type=range]').val();
+            $('.square').stop().animate({
+                height: size,
+                width: size
+            });
+        },
+        setColor: function () {
+            var color = $('#Favcolor').val();
+            $('.square').css('border-color', color);
+        },
+        bounceSquare: function () {
+            var bounce = new Bounce();
+            bounce
+                .translate({
+                    from: {x: 0, y:100},
+                    to: {x: 0, y: 0},
+                    duration: 1000,
+                    stiffness: 3,
+                    bounces:4
+                })
 
-            document.getElementsByClassName('square')[0].style.borderColor = square.borderColor;
-            console.log(document.getElementsByClassName('square'));
-        } else {
-            var div = document.createElement('div');
-            div.className = 'square';
-            div.style.width = square.width;
-            div.style.height = square.height;
-            div.style.borderColor = square.color;
-            var canvas = document.getElementsByClassName('canvas');
-            canvas[0].appendChild(div);
+                .applyTo(document.querySelectorAll(".square"));
+        },
+        handlers: {
+            '#Size mousemove': 'changeSize',
+            '#Favcolor change': 'setColor',
+            '#Bounce click': 'bounceSquare'
+        },
+        registerHandlers: function () {
+            var that = this;
+            $.each(this.handlers, function (key, value) {
+                var split = key.split(" "),
+                    element = split[0],
+                    trigger = split[1];
+
+                $(document).delegate(element, trigger, that[value]);
+            });
         }
+    };
 
-    }
-
-}
+    squareApplication.init();
+});

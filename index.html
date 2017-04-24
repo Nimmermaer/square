@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Square</title>
     <link rel="stylesheet" href="css/milligram.min.css">
+    <link rel="stylesheet" href="css/bounce.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script language="javascript" type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/bounce.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/scripts.js"></script>
-    <script>
 
-        var square = {
-            height: 300,
-            width: 300,
-            borderColor: '#ffvvc5'
-        };
-
-    </script>
 </head>
 <body>
 <div class="container">
@@ -22,9 +18,10 @@
     <div class="row">
         <div class="column column-50">
             <label for="Size">Größe</label>
-            <input orient="vertical" id="Size" type="range" min="0" max="700" step="1" onchange="square.height=value; square.width=value">
+            <input orient="vertical" id="Size" type="range" min="0" max="700" step="1" >
             <label for="Favcolor">Farbe</label>
-            <input type="color" id="Favcolor" value="#ff0000">
+            <input type="color" id="Favcolor" value="#ff0000"> <br/>
+            <button class="button-primary" id="Bounce" value="#ff0000">Spring!</button>
         </div>
         <div class="column column-50">
             <div class="canvas">

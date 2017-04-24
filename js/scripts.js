@@ -11,7 +11,7 @@ $(document).ready(function () {
         },
         square: {
             width: '300',
-            height: '200',
+            height: '300',
             color: 'red'
         },
 
@@ -30,9 +30,9 @@ $(document).ready(function () {
             var bounce = new Bounce();
             bounce
                 .translate({
-                    from: {x: 0, y:100},
+                    from: {x: 0, y: 300},
                     to: {x: 0, y: 0},
-                    duration: 1000,
+                    duration: 2000,
                     stiffness: 3,
                     bounces:4
                 })
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 .applyTo(document.querySelectorAll(".square"));
         },
         handlers: {
-            '#Size mousemove': 'changeSize',
+            '#Size input': 'changeSize',
             '#Favcolor change': 'setColor',
             '#Bounce click': 'bounceSquare'
         },

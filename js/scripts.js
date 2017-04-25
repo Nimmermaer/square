@@ -1,20 +1,21 @@
 /**
  * Created by Cox on 09.04.2017.
  */
-$(document).ready(function () {
+var $ = 'hallo';
+
+(function ($) {
     var squareApplication = {
+        square: {
+            width: '300',
+            height: '300',
+            color: 'red'
+        },
         init: function () {
             squareApplication.registerHandlers();
             $(".canvas").append("<div class='square'></div>");
             var currentSquare = $('.square');
             currentSquare.width(squareApplication.square.width).height(squareApplication.square.height);
         },
-        square: {
-            width: '300',
-            height: '300',
-            color: 'red'
-        },
-
         changeSize: function () {
             var size = $('#Size[type=range]').val();
             $('.square').stop().animate({
@@ -34,7 +35,7 @@ $(document).ready(function () {
                     to: {x: 0, y: 0},
                     duration: 2000,
                     stiffness: 3,
-                    bounces:4
+                    bounces: 4
                 })
 
                 .applyTo(document.querySelectorAll(".square"));
@@ -56,5 +57,8 @@ $(document).ready(function () {
         }
     };
 
-    squareApplication.init();
-});
+    $(document).ready(function () {
+        squareApplication.init();
+    });
+
+})(jQuery);
